@@ -159,16 +159,13 @@ function useNodeSpeedTest(initialNodes: NodeInfo[]) {
 
     const runTest = useCallback(async () => {
         setTestInProgress(true);
-        setNodes(initialNodes);
         setTestTime(getFormattedDate());
+        setNodes(initialNodes);
 
-        const testPromises = initialNodes.map(async node => {
+        for (const node of INITIAL_NODES) {
             const result = await testNodeLatency(node.url);
-
             setNodes(prev => prev.map(n => (n.id === node.id ? { ...n, ...result } : n)));
-        });
-
-        await Promise.all(testPromises);
+        }
 
         setTestInProgress(false);
     }, [initialNodes]);
