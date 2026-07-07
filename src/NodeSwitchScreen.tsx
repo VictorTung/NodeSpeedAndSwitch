@@ -20,6 +20,14 @@ const INITIAL_NODES: NodeInfo[] = [
     { id: "2", name: "節點02", url: "https://hk.yahoo.com", status: "測速中", ping: "" },
     { id: "3", name: "節點03", url: "http://bremsregelungen.xyz", status: "測速中", ping: "" },
     { id: "4", name: "節點04", url: "https://www.bing.com", status: "測速中", ping: "" },
+    { id: "5", name: "節點05", url: "https://1.1.1.1", status: "測速中", ping: "" },
+    { id: "6", name: "節點06", url: "https://8.8.8.8", status: "測速中", ping: "" },
+    { id: "7", name: "節點07", url: "https://www.baidu.com", status: "測速中", ping: "" },
+    { id: "8", name: "節點08", url: "https://www.apple.com", status: "測速中", ping: "" },
+    { id: "9", name: "節點09", url: "https://github.com", status: "測速中", ping: "" },
+    { id: "10", name: "節點10", url: "https://www.amazon.com", status: "測速中", ping: "" },
+    { id: "11", name: "節點11", url: "https://www.microsoft.com", status: "測速中", ping: "" },
+    { id: "12", name: "節點12", url: "https://www.wikipedia.org", status: "測速中", ping: "" },
 ];
 
 const CONFIG = {
@@ -80,7 +88,9 @@ export default function NodeSwitchScreen() {
                         <Pressable
                             key={item.id}
                             style={({ pressed }) => [styles.nodeItem, pressed && styles.pressedButtonOpacity]}
-                            onPress={() => setSelectedId(item.id)}
+                            onPress={() => {
+                                if (item.status === "正常" && !testInProgress) setSelectedId(item.id);
+                            }}
                         >
                             {/* 節點名稱 */}
                             <Text style={styles.nodeName}>{item.name}</Text>
