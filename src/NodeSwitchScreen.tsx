@@ -26,13 +26,6 @@ const CONFIG = {
     TIMEOUT: 1000,
 };
 
-// 格式化時間工具函式 (產生 YYYY-MM-DD HH:mm:ss)
-const getFormattedDate = () => {
-    const now = new Date();
-    const pad = (num: number) => String(num).padStart(2, "0");
-    return `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
-};
-
 export default function NodeSwitchScreen() {
     const [selectedId, setSelectedId] = useState("1");
     const { testInProgress, nodes, testTime, runTest } = useNodeSpeedTest(INITIAL_NODES);
@@ -151,6 +144,12 @@ const testNodeLatency = async (nodeUrl: string): Promise<{ ping: string; status:
     } finally {
         clearTimeout(timeoutId);
     }
+};
+
+const getFormattedDate = () => {
+    const now = new Date();
+    const pad = (num: number) => String(num).padStart(2, "0");
+    return `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
 };
 
 function useNodeSpeedTest(initialNodes: NodeInfo[]) {
