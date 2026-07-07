@@ -88,9 +88,7 @@ export default function NodeSwitchScreen() {
                         <Pressable
                             key={item.id}
                             style={({ pressed }) => [styles.nodeItem, pressed && styles.pressedButtonOpacity]}
-                            onPress={() => {
-                                if (item.status === "正常" && !testInProgress) setSelectedId(item.id);
-                            }}
+                            onPress={() => item.status === "正常" && !testInProgress && setSelectedId(item.id)}
                         >
                             {/* 節點名稱 */}
                             <Text style={styles.nodeName}>{item.name}</Text>
